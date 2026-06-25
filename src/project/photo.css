@@ -1,13 +1,17 @@
-/* ── Layout ─────────────────────────────────────────────── */
-.photo-container {
-  min-height: 100vh;
-  background-color: #f4f6f9;
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f4f6f9;
+  margin: 0;
 }
 
 /* ── Navbar ─────────────────────────────────────────────── */
 #header {
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -19,38 +23,37 @@
   padding: 0 24px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  height: 72px;
+  gap: 8px;
+  height: 68px;
 }
 
 #nav ul img {
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   object-fit: cover;
   margin-right: 12px;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255,255,255,0.2);
 }
 
 #nav ul li {
   list-style: none;
-  font-size: 14px;
-  font-weight: 600;
 }
 
 #nav ul li a {
   display: block;
   padding: 8px 18px;
   border-radius: 20px;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255,255,255,0.75);
   text-decoration: none;
-  letter-spacing: 0.5px;
+  font-size: 14px;
+  font-weight: 500;
   transition: background 0.2s, color 0.2s;
 }
 
 #nav ul li a:hover,
 .nav-active a {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255,255,255,0.15);
   color: #fff;
 }
 
@@ -64,7 +67,7 @@ a {
   padding: 10px 16px;
   border-radius: 22px;
   border: none;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255,255,255,0.12);
   color: #fff;
   font-size: 14px;
   width: 220px;
@@ -73,11 +76,11 @@ a {
 }
 
 #search::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255,255,255,0.45);
 }
 
 #search:focus {
-  background: rgba(255, 255, 255, 0.22);
+  background: rgba(255,255,255,0.22);
   width: 280px;
 }
 
@@ -85,59 +88,59 @@ a {
 .page-header {
   text-align: center;
   padding: 32px 24px 8px;
-  color: #2d3748;
 }
 
 .page-header h2 {
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 700;
-  margin: 0 0 6px;
+  color: #2d3748;
+  margin-bottom: 6px;
 }
 
 .page-header p {
   color: #718096;
   font-size: 15px;
-  margin: 0;
 }
 
 /* ── Image grid ─────────────────────────────────────────── */
 .imageContainer {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 24px;
+  gap: 20px;
   padding: 24px;
 }
 
 /* ── Category cards (Home / AddPhoto) ───────────────────── */
 .profile-picture {
   position: relative;
-  border-radius: 16px;
+  border-radius: 12px;
   overflow: hidden;
   background: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
+/* ── SQUARE images — no circle ───────────────────────────── */
 .profile-picture img {
   width: 100%;
-  height: 260px;
+  height: 220px;
   object-fit: cover;
-  border-radius: 50%;
   display: block;
+  border-radius: 0;
   transition: transform 0.3s;
 }
 
 .profile-picture:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.14);
 }
 
 .profile-picture:hover img {
-  transform: scale(1.04);
+  transform: scale(1.05);
 }
 
-/* AddPhoto card: show "+" overlay on hover */
+/* AddPhoto "+" overlay */
 .add-card::after {
   content: '+';
   position: absolute;
@@ -146,8 +149,9 @@ a {
   align-items: center;
   justify-content: center;
   font-size: 56px;
+  font-weight: 200;
   color: #fff;
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(0,0,0,0.32);
   opacity: 0;
   transition: opacity 0.2s;
 }
@@ -157,12 +161,7 @@ a {
 }
 
 .card-label {
-  padding: 10px;
-  text-align: center;
-  font-weight: 600;
-  font-size: 14px;
-  color: #2d3748;
-  background: #fff;
+  display: none;
 }
 
 /* ── Gallery cards ──────────────────────────────────────── */
@@ -171,13 +170,14 @@ a {
   border-radius: 12px;
   overflow: hidden;
   background: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .profilePicture img {
   width: 100%;
-  height: 260px;
+  height: 220px;
   object-fit: cover;
   display: block;
   transition: transform 0.3s;
@@ -185,11 +185,11 @@ a {
 
 .profilePicture:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.14);
 }
 
 .profilePicture:hover img {
-  transform: scale(1.04);
+  transform: scale(1.05);
 }
 
 /* ── Tooltip ────────────────────────────────────────────── */
@@ -198,24 +198,29 @@ a {
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 100%);
+  padding: 32px 12px 12px;
+  background: linear-gradient(0deg, rgba(0,0,0,0.82) 0%, transparent 100%);
   color: #fff;
-  padding: 14px 12px 10px;
-  text-align: left;
   font-size: 13px;
   opacity: 0;
-  transform: translateY(8px);
+  transform: translateY(6px);
   transition: opacity 0.25s, transform 0.25s;
 }
 
+.tooltip strong {
+  display: block;
+  font-size: 15px;
+  margin-bottom: 3px;
+}
+
 .tooltip p {
-  margin: 3px 0;
+  margin: 2px 0;
+  color: rgba(255,255,255,0.75);
 }
 
 .tooltip-hint {
   font-size: 11px;
-  color: rgba(255,255,255,0.6);
-  margin-top: 6px !important;
+  color: rgba(255,255,255,0.5);
 }
 
 .profile-picture:hover .tooltip,
@@ -229,11 +234,11 @@ a {
   position: fixed;
   inset: 0;
   z-index: 200;
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(0,0,0,0.5);
   display: flex;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(4px);
 }
 
 .modal-content {
@@ -241,7 +246,7 @@ a {
   border-radius: 16px;
   padding: 32px 28px 28px;
   width: min(440px, 90vw);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
   position: relative;
   animation: slideUp 0.2s ease;
 }
@@ -272,16 +277,16 @@ a {
 }
 
 .modal-title {
-  margin: 0 0 4px;
   font-size: 22px;
   font-weight: 700;
   color: #1a202c;
+  margin-bottom: 4px;
 }
 
 .modal-subtitle {
-  margin: 0 0 20px;
   font-size: 13px;
   color: #718096;
+  margin-bottom: 20px;
 }
 
 /* ── Form ───────────────────────────────────────────────── */
@@ -305,15 +310,14 @@ a {
   font-size: 14px;
   color: #2d3748;
   background: #f7fafc;
-  box-sizing: border-box;
-  transition: border-color 0.2s, box-shadow 0.2s;
   outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .input-field:focus {
   border-color: #667eea;
   background: #fff;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+  box-shadow: 0 0 0 3px rgba(102,126,234,0.15);
 }
 
 .input-field:disabled {
@@ -333,7 +337,7 @@ a {
   margin-top: 4px;
 }
 
-/* ── Modal action buttons ───────────────────────────────── */
+/* ── Modal buttons ──────────────────────────────────────── */
 .modal-actions {
   display: flex;
   gap: 12px;
@@ -376,12 +380,12 @@ a {
 }
 
 .delete-button {
-  padding: 7px 14px;
+  padding: 6px 14px;
   border: none;
   border-radius: 6px;
   background: #fc8181;
   color: #fff;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.15s;
@@ -397,7 +401,7 @@ a {
     flex-wrap: wrap;
     height: auto;
     padding: 12px 16px;
-    gap: 8px;
+    gap: 6px;
   }
 
   #nav ul img {
@@ -412,17 +416,13 @@ a {
   }
 
   .imageContainer {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 16px;
-    padding: 16px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 12px;
   }
 
   .profile-picture img,
   .profilePicture img {
     height: 160px;
-  }
-
-  .modal-content {
-    padding: 24px 20px 20px;
   }
 }

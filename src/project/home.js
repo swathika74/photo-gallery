@@ -9,56 +9,46 @@ export const Home = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    localStorage.removeItem('imageCategory');
     const imageData = localStorage.getItem(images.length + 1);
-    
-    let updatedImages = [];
-    if (imageData) {
-      updatedImages = [...images, JSON.parse(imageData)];
-    } else {
-      updatedImages = [...images];
-    }
-    setFilteredImages(updatedImages);
+    setFilteredImages(imageData ? [...images, JSON.parse(imageData)] : [...images]);
   }, []);
- 
-  
+
   const handleImageClicked = (category) => {
     localStorage.setItem('imageCategory', category);
     navigate('/gallery');
   };
 
-  useEffect(() => {
-    localStorage.removeItem('imageCategory');
-  }, []);
-
-  const handleSearchChange = (event) => {
-    setSearch(event.target.value);
-    const searchData = event.target.value;
-    const results = images.filter(image =>
-      image.name.toLowerCase().includes(searchData.toLowerCase())
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearch(value);
+    setFilteredImages(
+      images.filter(img => img.name.toLowerCase().includes(value.toLowerCase()))
     );
-    setFilteredImages(results);
   };
- 
+
   return (
     <div className="photo-container">
       <div id="header">
         <div id="nav">
           <ul>
             <img src="image/logo.png" alt="Logo" />
-            <li><Link to="/home"><b>Home</b></Link></li>
-            <li><Link to="/gallery"><b>Gallery</b></Link></li>
-            <li><Link to="/addphoto"><b>AddPhoto</b></Link></li>
-            <input type="text" id="search" placeholder="Search here..." value={search} onChange={handleSearchChange} />
+            <li className="nav-active"><Link to="/home">Home</Link></li>
+            <li><Link to="/gallery">Gallery</Link></li>
+            <li><Link to="/addphoto">Add Photo</Link></li>
+            <input type="text" id="search" placeholder="Search categories..." value={search} onChange={handleSearchChange} />
           </ul>
         </div>
       </div>
-      <div className='imageContainer' id="photocontainer">
+
+      <div className="imageContainer" id="photocontainer">
         {filteredImages.map((image) => (
-          <div className="profile-picture" key={image.id}>
-            <img src={image.imgsrc} alt={image.name} style={{ width: "300px", height: "300px" }} onClick={() => handleImageClicked(image.category)} /> 
-              <div className="tooltip">
-                {image.name} category
-              </div>
+          <div className="profile-picture" key={image.id} onClick={() => handleImageClicked(image.category)}>
+            <img src={image.imgsrc} alt={image.name} />
+            <div className="tooltip">
+              <strong>{image.name}</strong>
+              <p>Click to view</p>
+            </div>
           </div>
         ))}
       </div>
